@@ -96,4 +96,11 @@ public class Exchanges {
 	public void setTrustScoreRank(int trustScoreRank) {
 		this.trustScoreRank = trustScoreRank;
 	}
+	@Override
+	public String toString() {
+		return "Exchanges [id=" + id + ", name=" + name + ", yearEstablished=" + yearEstablished + ", country="
+				+ country + ", description=" + description + ", url=" + url + ", image=" + image
+				+ ", hasTradingIncentive=" + hasTradingIncentive + ", tradeVolume24hBtc=" + tradeVolume24hBtc
+				+ ", trustScore=" + trustScore + ", trustScoreRank=" + trustScoreRank + "]";
+	}
 }
