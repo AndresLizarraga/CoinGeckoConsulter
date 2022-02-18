@@ -29,7 +29,8 @@ public class DeveloperData {
     private long commitCount4Weeks;
     @JsonProperty("last_4_weeks_commit_activity_series")
     private List<Long> last4WeeksCommitActivitySeries;
-	public long getForks() {
+	
+    public long getForks() {
 		return forks;
 	}
 	public void setForks(long forks) {
@@ -88,5 +89,14 @@ public class DeveloperData {
 	}
 	public void setLast4WeeksCommitActivitySeries(List<Long> last4WeeksCommitActivitySeries) {
 		this.last4WeeksCommitActivitySeries = last4WeeksCommitActivitySeries;
+	}
+	
+	@Override
+	public String toString() {
+		return "DeveloperData [forks=" + forks + ", stars=" + stars + ", subscribers=" + subscribers + ", totalIssues="
+				+ totalIssues + ", closedIssues=" + closedIssues + ", pullRequestsMerged=" + pullRequestsMerged
+				+ ", pullRequestContributors=" + pullRequestContributors + ", codeAdditionsDeletions4Weeks="
+				+ codeAdditionsDeletions4Weeks + ", commitCount4Weeks=" + commitCount4Weeks
+				+ ", last4WeeksCommitActivitySeries=" + last4WeeksCommitActivitySeries + "]";
 	}
 }

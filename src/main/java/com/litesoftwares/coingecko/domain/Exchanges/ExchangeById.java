@@ -33,5 +33,4 @@ public class ExchangeById extends Exchanges{
 	public String toString() {
 		return "ExchangeById [tickers=" + tickers + ", statusUpdates=" + statusUpdates + "]";
 	}
-	
 }

@@ -22,5 +22,68 @@ public class DecentralizedFinanceDefiData {
     private String topCoinName;
     @JsonProperty("top_coin_defi_dominance")
     private double topCoinDefiDominance;
+    
+    public String getDefiMarketCap() {
+		return defiMarketCap;
+	}
 
+	public void setDefiMarketCap(String defiMarketCap) {
+		this.defiMarketCap = defiMarketCap;
+	}
+
+	public String getEthMarketCap() {
+		return ethMarketCap;
+	}
+
+	public void setEthMarketCap(String ethMarketCap) {
+		this.ethMarketCap = ethMarketCap;
+	}
+
+	public String getDefiToEthRatio() {
+		return defiToEthRatio;
+	}
+
+	public void setDefiToEthRatio(String defiToEthRatio) {
+		this.defiToEthRatio = defiToEthRatio;
+	}
+
+	public String getTradingVolume24h() {
+		return tradingVolume24h;
+	}
+
+	public void setTradingVolume24h(String tradingVolume24h) {
+		this.tradingVolume24h = tradingVolume24h;
+	}
+
+	public String getDefiDominance() {
+		return defiDominance;
+	}
+
+	public void setDefiDominance(String defiDominance) {
+		this.defiDominance = defiDominance;
+	}
+
+	public String getTopCoinName() {
+		return topCoinName;
+	}
+
+	public void setTopCoinName(String topCoinName) {
+		this.topCoinName = topCoinName;
+	}
+
+	public double getTopCoinDefiDominance() {
+		return topCoinDefiDominance;
+	}
+
+	public void setTopCoinDefiDominance(double topCoinDefiDominance) {
+		this.topCoinDefiDominance = topCoinDefiDominance;
+	}
+
+	@Override
+	public String toString() {
+		return "DecentralizedFinanceDefiData [defiMarketCap=" + defiMarketCap + ", ethMarketCap=" + ethMarketCap
+				+ ", defiToEthRatio=" + defiToEthRatio + ", tradingVolume24h=" + tradingVolume24h + ", defiDominance="
+				+ defiDominance + ", topCoinName=" + topCoinName + ", topCoinDefiDominance=" + topCoinDefiDominance
+				+ "]";
+	}
 }

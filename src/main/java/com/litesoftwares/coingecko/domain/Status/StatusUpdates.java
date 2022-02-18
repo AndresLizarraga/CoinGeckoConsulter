@@ -19,4 +19,9 @@ public class StatusUpdates {
 	public void setUpdates(List<Update> updates) {
 		this.updates = updates;
 	}
+
+	@Override
+	public String toString() {
+		return "StatusUpdates [updates=" + updates + "]";
+	}
 }

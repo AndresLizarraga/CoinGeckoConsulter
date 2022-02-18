@@ -26,5 +26,8 @@ public class Trending {
 	public void setExchanges(List<Object> exchanges) {
 		this.exchanges = exchanges;
 	}
-   
+	@Override
+	public String toString() {
+		return "Trending [coins=" + coins + ", exchanges=" + exchanges + "]";
+	}
 }

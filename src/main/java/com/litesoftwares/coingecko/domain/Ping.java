@@ -10,4 +10,8 @@ public class Ping {
     @JsonProperty("gecko_says")
     private String geckoSays;
 
+	@Override
+	public String toString() {
+		return "Ping [geckoSays=" + geckoSays + "]";
+	}
 }

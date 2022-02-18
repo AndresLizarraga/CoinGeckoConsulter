@@ -18,5 +18,9 @@ public class Global {
 	public void setData(GlobalData data) {
 		this.data = data;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Global [data=" + data + "]";
+	}
 }
