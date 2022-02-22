@@ -21,6 +21,7 @@ public class CoinsExample {
 
         List<CoinList> coinList = client.getCoinList();
         System.out.println(coinList);
+        System.out.println(client.getTrending());
 
         long totalCoins = coinList.size();
         System.out.println(totalCoins);
