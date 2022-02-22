@@ -34,4 +34,8 @@ public class Events {
 	public void setPage(long page) {
 		this.page = page;
 	}
+	@Override
+	public String toString() {
+		return "Events [data=" + data + ", count=" + count + ", page=" + page + "]";
+	}
 }

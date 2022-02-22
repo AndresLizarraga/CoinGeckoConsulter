@@ -10,4 +10,16 @@ public class TrendingCoin {
     @JsonProperty("item")
     private TrendingCoinItem item;
 
+	public TrendingCoinItem getItem() {
+		return item;
+	}
+
+	public void setItem(TrendingCoinItem item) {
+		this.item = item;
+	}
+
+	@Override
+	public String toString() {
+		return "TrendingCoin [item=" + item + "]";
+	}
 }

@@ -249,4 +249,10 @@ public class CoinGeckoApiClientImpl implements CoinGeckoApiClient {
     public void shutdown() {
         coinGeckoApi.shutdown();
     }
+
+	@Override
+	public String toString() {
+		return "CoinGeckoApiClientImpl [coinGeckoApiService=" + coinGeckoApiService + ", coinGeckoApi=" + coinGeckoApi
+				+ "]";
+	}
 }

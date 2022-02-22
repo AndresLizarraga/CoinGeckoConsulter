@@ -138,4 +138,12 @@ public class Ticker {
 	public void setCoinId(String coinId) {
 		this.coinId = coinId;
 	}
+	@Override
+	public String toString() {
+		return "Ticker [base=" + base + ", target=" + target + ", market=" + market + ", last=" + last + ", volume="
+				+ volume + ", convertedLast=" + convertedLast + ", convertedVolume=" + convertedVolume + ", trustScore="
+				+ trustScore + ", bidAskSpreadPercentage=" + bidAskSpreadPercentage + ", timestamp=" + timestamp
+				+ ", lastTradedAt=" + lastTradedAt + ", lastFetchAt=" + lastFetchAt + ", isAnomaly=" + isAnomaly
+				+ ", isStale=" + isStale + ", tradeUrl=" + tradeUrl + ", coinId=" + coinId + "]";
+	}
 }

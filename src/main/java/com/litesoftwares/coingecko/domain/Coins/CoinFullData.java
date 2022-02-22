@@ -285,5 +285,21 @@ public class CoinFullData {
 	public void setTickers(List<Ticker> tickers) {
 		this.tickers = tickers;
 	}
-    
+	
+	@Override
+	public String toString() {
+		return "CoinFullData [id=" + id + ", symbol=" + symbol + ", name=" + name + ", assetPlatformId="
+				+ assetPlatformId + ", platforms=" + platforms + ", blockTimeInMinutes=" + blockTimeInMinutes
+				+ ", hashingAlgorithm=" + hashingAlgorithm + ", categories=" + categories + ", publicNotice="
+				+ publicNotice + ", additionalNotices=" + additionalNotices + ", localization=" + localization
+				+ ", description=" + description + ", links=" + links + ", image=" + image + ", countryOrigin="
+				+ countryOrigin + ", genesisDate=" + genesisDate + ", sentimentVotesUpPercentage="
+				+ sentimentVotesUpPercentage + ", sentimentVotesDownPercentage=" + sentimentVotesDownPercentage
+				+ ", contractAddress=" + contractAddress + ", icoData=" + icoData + ", marketCapRank=" + marketCapRank
+				+ ", coingeckoRank=" + coingeckoRank + ", coingeckoScore=" + coingeckoScore + ", developerScore="
+				+ developerScore + ", communityScore=" + communityScore + ", liquidityScore=" + liquidityScore
+				+ ", publicInterestScore=" + publicInterestScore + ", marketData=" + marketData + ", communityData="
+				+ communityData + ", developerData=" + developerData + ", publicInterestStats=" + publicInterestStats
+				+ ", statusUpdates=" + statusUpdates + ", lastUpdated=" + lastUpdated + ", tickers=" + tickers + "]";
+	}
 }

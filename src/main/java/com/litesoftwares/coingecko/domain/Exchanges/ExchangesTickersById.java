@@ -27,7 +27,8 @@ public class ExchangesTickersById {
 	public void setTickers(List<Ticker> tickers) {
 		this.tickers = tickers;
 	}
-    
-    
-
+	@Override
+	public String toString() {
+		return "ExchangesTickersById [name=" + name + ", tickers=" + tickers + "]";
+	}
 }

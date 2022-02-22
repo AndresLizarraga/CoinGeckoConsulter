@@ -17,6 +17,11 @@ public class DecentralizedFinanceDefi {
 	public void setData(DecentralizedFinanceDefiData data) {
 		this.data = data;
 	}
+
+	@Override
+	public String toString() {
+		return "DecentralizedFinanceDefi [data=" + data + "]";
+	}
 }
 
 

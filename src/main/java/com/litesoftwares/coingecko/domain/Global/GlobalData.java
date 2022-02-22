@@ -90,5 +90,12 @@ public class GlobalData {
 	public void setUpdatedAt(long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-    
+	@Override
+	public String toString() {
+		return "GlobalData [activeCryptocurrencies=" + activeCryptocurrencies + ", upcomingIcos=" + upcomingIcos
+				+ ", ongoingIcos=" + ongoingIcos + ", endedIcos=" + endedIcos + ", markets=" + markets
+				+ ", totalMarketCap=" + totalMarketCap + ", totalVolume=" + totalVolume + ", marketCapPercentage="
+				+ marketCapPercentage + ", marketCapChangePercentage24hUsd=" + marketCapChangePercentage24hUsd
+				+ ", updatedAt=" + updatedAt + "]";
+	}
 }

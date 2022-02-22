@@ -14,6 +14,7 @@ public class ExchangeById extends Exchanges{
     @JsonProperty("tickers")
     private List<Ticker> tickers;
     @JsonProperty("status_updates")
+   
     private List<Object> statusUpdates;
     
 	public List<Ticker> getTickers() {
@@ -28,7 +29,8 @@ public class ExchangeById extends Exchanges{
 	public void setStatusUpdates(List<Object> statusUpdates) {
 		this.statusUpdates = statusUpdates;
 	}
-    
-	
-	
+	@Override
+	public String toString() {
+		return "ExchangeById [tickers=" + tickers + ", statusUpdates=" + statusUpdates + "]";
+	}
 }
