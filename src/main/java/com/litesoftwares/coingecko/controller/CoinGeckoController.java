@@ -44,8 +44,8 @@ public class CoinGeckoController {
         ExchangeRates exchangeRates = coinGeckoClient.getExchangeRates();
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
         try {
-        BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("mPlT2nexpHcb64r3rXOKxim14GgfpmwdCxKWjeiQfzryh0pSUEjzCpTp2lqFA6x4",
-        		"RZPtgGD0oEV8yo1EqSH4XCQXlfUMM1sKTagVeqrkn5oGO6CRiGEWQ4EzLkOiuKCF");
+        BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("",
+        		"");
         BinanceApiRestClient binanceRestClient = factory.newRestClient();
         
         log.onInfo("Iniciando prueba de endpoint Binance...");
