@@ -112,12 +112,13 @@ function App() {
     //   currency: state.value.toUpperCase(),
     // };
     try{
-      
+      const names = await axios.get('http://localhost:8081/consultAllPrices'); 
+      const coin = names.data.filter(coin => coin.symbol === state.value ); 
       if(!COIN_OBJECT[state.value]){
         throw Error('No hay monedas con ese nombre');
       }
-
-      const maticPrices = await axios.get(`https://api.coingecko.com/api/v3/coins/${COIN_OBJECT[state.value]}`).then(data => {
+      
+      const maticPrices = await axios.get(`https://api.coingecko.com/api/v3/coins/${coin.map(coin => coin.id)}`).then(data => {
         console.log(data);
         setCoinData({ value: data.data });
         setImg({ value: data.data.image.large });

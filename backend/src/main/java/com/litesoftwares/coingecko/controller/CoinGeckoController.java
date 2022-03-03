@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.binance.api.client.BinanceApiClientFactory;
@@ -26,6 +28,7 @@ import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import ch.qos.logback.classic.Logger;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CoinGeckoController {
 	
 	@Autowired
@@ -43,6 +46,7 @@ public class CoinGeckoController {
 
         ExchangeRates exchangeRates = coinGeckoClient.getExchangeRates();
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
+		//coinGeckoClient.getCoinById(coinGeckoId);
         try {
         BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("",
         		"");
@@ -63,7 +67,7 @@ public class CoinGeckoController {
         	log.onInfo("La Lista de Trending coins es: " + coinGeckoClient.getTrending().toString());
         	log.onInfo(binanceRestClient.getAllPrices().toString());
         	
-        	return ResponseEntity.ok(coinGeckoClient.getPrice("bitcoin", Currency.USD));
+        	return ResponseEntity.ok(coinMarkets);
         } else {
         	throw new Exception();
         }
