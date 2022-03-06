@@ -5,27 +5,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.market.TickerStatistics;
 import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
-import com.litesoftwares.coingecko.domain.ExchangeRates.ExchangeRates;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
-
-import ch.qos.logback.classic.Logger;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -44,7 +37,7 @@ public class CoinGeckoController {
 
         CoinGeckoApiClient coinGeckoClient = new CoinGeckoApiClientImpl();
 
-        ExchangeRates exchangeRates = coinGeckoClient.getExchangeRates();
+        //ExchangeRates exchangeRates = coinGeckoClient.getExchangeRates();
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
 		//coinGeckoClient.getCoinById(coinGeckoId);
         try {
