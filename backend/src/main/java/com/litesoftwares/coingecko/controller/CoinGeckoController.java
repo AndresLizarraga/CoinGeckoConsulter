@@ -37,9 +37,7 @@ public class CoinGeckoController {
 
         CoinGeckoApiClient coinGeckoClient = new CoinGeckoApiClientImpl();
 
-        //ExchangeRates exchangeRates = coinGeckoClient.getExchangeRates();
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
-		//coinGeckoClient.getCoinById(coinGeckoId);
         try {
         BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("",
         		"");
