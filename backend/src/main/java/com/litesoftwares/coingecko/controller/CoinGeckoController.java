@@ -70,9 +70,6 @@ public class CoinGeckoController {
         	System.out.println(e.getMessage());
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        
-        
-		
 	}
 	
 	private Map<String, TickerStatistics> tickerMap(List<TickerStatistics> stats) {
