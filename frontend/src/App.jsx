@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import WebSocketService from './services/WebSocketService';
 
 // import NodeWalletConnect from "@walletconnect/node";
 // import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
@@ -113,12 +114,15 @@ function App() {
     // };
     try{
       const names = await axios.get('http://localhost:8081/consultAllPrices'); 
+      console.log('Backend results -----> ');
+      console.log(names);
       const coin = names.data.filter(coin => coin.symbol === state.value ); 
-      if(!COIN_OBJECT[state.value]){
+      
+      if(!coin){
         throw Error('No hay monedas con ese nombre');
       }
       
-      const maticPrices = await axios.get(`https://api.coingecko.com/api/v3/coins/${coin.map(coin => coin.id)}`).then(data => {
+      const maticPrices = axios.get(`https://api.coingecko.com/api/v3/coins/${coin.map(coin => coin.id)}`).then(data => {
         console.log(data);
         setCoinData({ value: data.data });
         setImg({ value: data.data.image.large });
@@ -153,6 +157,7 @@ function App() {
                     })
                   )}
                   </p>
+                  <p>Current binance price: {coinData.value.tickers.filter(ticker => ticker.market.indentifier === 'binance' && ticker.market.target === 'USDT').last}</p>
                   <p>Current Min Price: {Math.min.apply(Math, coinData.value.tickers.map(exc =>{ 
                       return exc.target === 'USDT' ? exc.last : 100000000000000; 
                     })
@@ -163,6 +168,7 @@ function App() {
             }
           </div><i className="fa fa-xing" aria-hidden="true"></i>
         </section>
+        <WebSocketService></WebSocketService>
     </div>
   );
 }
