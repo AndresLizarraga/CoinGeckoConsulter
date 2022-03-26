@@ -1,7 +1,7 @@
 import React, { Component } from "react/cjs/react.development";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { W3CWebSocketClient } from "websocket/lib/WebSocketClient";
 
-const socket = new W3CWebSocket('ws://127.0.0.1:8081');
+const client = new W3CWebSocketClient();
 
 export class WebSocketService extends Component {
     constructor(props){
@@ -9,12 +9,35 @@ export class WebSocketService extends Component {
     }
 
     componentWillMount() {
-        socket.onopen = () => {
-            console.log('Client connected to backend');
-        };
-        socket.onmessage = (message) => {
-            console.log(message);
-        };
+        client.on('connectFailed', function(error) {
+            console.log('Connect Error: ' + error.toString());
+        });
+        
+        client.on('connect', function(connection) {
+            console.log('WebSocket Client Connected');
+            connection.on('error', function(error) {
+                console.log("Connection Error: " + error.toString());
+            });
+            connection.on('close', function() {
+                console.log('echo-protocol Connection Closed');
+            });
+            connection.on('message', function(message) {
+                if (message.type === 'utf8') {
+                    console.log("Received: '" + message.utf8Data + "'");
+                }
+            });
+            
+            function sendNumber() {
+                if (connection.connected) {
+                    var number = Math.round(Math.random() * 0xFFFFFF);
+                    connection.sendUTF(number.toString());
+                    setTimeout(sendNumber, 1000);
+                }
+            }
+            sendNumber();
+        });
+        
+        client.connect('ws://localhost:4200/', 'ws/v1/greetings');
     }
 
     async send(msg) {
