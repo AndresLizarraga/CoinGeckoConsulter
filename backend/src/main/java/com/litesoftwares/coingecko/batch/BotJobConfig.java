@@ -14,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.litesoftwares.coingecko.batch.steps.CoinMarketsProcessor;
+import com.litesoftwares.coingecko.batch.steps.CoinMarketsReader;
+import com.litesoftwares.coingecko.batch.steps.CoinMarketsWriter;
 import com.litesoftwares.coingecko.batch.steps.ConsultPricesFirstTask;
 import com.litesoftwares.coingecko.batch.steps.Processor;
 import com.litesoftwares.coingecko.batch.steps.Reader;
 import com.litesoftwares.coingecko.batch.steps.Writer;
+import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 
 @Configuration
 @EnableBatchProcessing
@@ -35,12 +39,28 @@ public class BotJobConfig extends DefaultBatchConfigurer {
 				.incrementer(new RunIdIncrementer()).listener(listener())
 				.flow(orderStep1()).end().build();
 	}
+	
+	@Bean
+	public Job coinMarketsJob() {
+		return jobBuilderFactory.get("coinMarketsJob")
+				.incrementer(new RunIdIncrementer()).listener(listener())
+				.flow(orderStep2()).end().build();
+	}
 
 	@Bean
 	public Step orderStep1() {
 		return stepBuilderFactory.get("orderStep1").<String, String> chunk(1)
-				.reader(new Reader()).processor(new Processor())
+				.reader(new Reader())
+				.processor(new Processor())
 				.writer(new Writer()).build();
+	}
+	
+	@Bean
+	public Step orderStep2() {
+		return stepBuilderFactory.get("orderStep2").<CoinMarkets, CoinMarkets> chunk(100)
+				.reader(new CoinMarketsReader())
+				.processor(new CoinMarketsProcessor())
+				.writer(new CoinMarketsWriter()).build();
 	}
 
 	@Bean

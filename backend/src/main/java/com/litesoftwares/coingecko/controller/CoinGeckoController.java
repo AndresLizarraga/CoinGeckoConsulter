@@ -36,7 +36,10 @@ public class CoinGeckoController {
     JobLauncher jobLauncher;
  
     @Autowired
-    Job processJob;
+    Job coinMarketsJob;
+    
+//    @Autowired
+//    Job processJob;
 
 	@GetMapping(value="/consultar")
 	public String consultant() {
@@ -48,7 +51,7 @@ public class CoinGeckoController {
 	 
 	            JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
 	                    .toJobParameters();
-	            jobLauncher.run(processJob, jobParameters);
+	            jobLauncher.run(coinMarketsJob, jobParameters);
 	 
 	        return "Batch job has been invoked";
 	    }
