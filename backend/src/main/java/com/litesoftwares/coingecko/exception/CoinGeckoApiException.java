@@ -5,6 +5,10 @@ import com.litesoftwares.coingecko.CoinGeckoApiError;
 public class CoinGeckoApiException extends RuntimeException {
     private final static long serialVersionUID = -4298738252483677889L;
     private CoinGeckoApiError error;
+    
+    public CoinGeckoApiException() {
+    	
+    }
 
     public CoinGeckoApiException(CoinGeckoApiError error) {
         this.error = error;

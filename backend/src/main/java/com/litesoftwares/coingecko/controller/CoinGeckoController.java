@@ -24,6 +24,7 @@ import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
+import com.litesoftwares.coingecko.service.CoinMarketsService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,6 +38,9 @@ public class CoinGeckoController {
  
     @Autowired
     Job coinMarketsJob;
+    
+    @Autowired
+    CoinMarketsService cmS;
     
 //    @Autowired
 //    Job processJob;
@@ -62,6 +66,9 @@ public class CoinGeckoController {
         CoinGeckoApiClient coinGeckoClient = new CoinGeckoApiClientImpl();
 
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
+        
+        List<CoinMarkets> coinMarkets2 = cmS.getCoinMarkets(); 
+        System.out.println(coinMarkets2);
         try {
         BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("",
         		"");

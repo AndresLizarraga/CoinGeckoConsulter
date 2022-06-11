@@ -16,20 +16,24 @@ import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.exception.CoinGeckoApiException;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
+import com.litesoftwares.coingecko.service.CoinMarketsService;
 
-@Component
+@Service
 public class CoinMarketsReader implements ItemReader<CoinMarkets> {
 
 	@Autowired
 	private LogListener log;
 	
+    @Autowired
+    CoinMarketsService cmS;
+	
 	@Override
 	public CoinMarkets read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 		// TODO Auto-generated method stub
-		   CoinGeckoApiClient coinGeckoClient = new CoinGeckoApiClientImpl();
-		   List<CoinMarkets> coinMarkets = null;
+
+		   List<CoinMarkets> coinMarkets = cmS.getCoinMarkets();
 		   try {
-	        coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
+	        coinMarkets = cmS.getCoinMarkets();
 		   } catch (CoinGeckoApiException e) {
 			   log.onWarn("Atrapando excepcion de CoinGecko");
 		   }
