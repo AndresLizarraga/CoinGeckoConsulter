@@ -24,6 +24,7 @@ import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
+import com.litesoftwares.coingecko.service.BTC_ConsultService;
 import com.litesoftwares.coingecko.service.CoinMarketsService;
 
 @RestController
@@ -36,14 +37,17 @@ public class CoinGeckoController {
     @Autowired
     JobLauncher jobLauncher;
  
-    @Autowired
-    Job coinMarketsJob;
+//    @Autowired
+//    Job coinMarketsJob;
     
     @Autowired
     CoinMarketsService cmS;
     
-//    @Autowired
-//    Job processJob;
+    @Autowired
+    BTC_ConsultService btcService;
+    
+    @Autowired
+    Job processJob;
 
 	@GetMapping(value="/consultar")
 	public String consultant() {
@@ -55,14 +59,15 @@ public class CoinGeckoController {
 	 
 	            JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
 	                    .toJobParameters();
-	            jobLauncher.run(coinMarketsJob, jobParameters);
+	            jobLauncher.run(processJob, jobParameters);
 	 
 	        return "Batch job has been invoked";
 	    }
 	
 	@GetMapping(value="/consultAllPrices")
 	public ResponseEntity<Object> consultPrice() {
-
+		btcService.updateData();
+		
         CoinGeckoApiClient coinGeckoClient = new CoinGeckoApiClientImpl();
 
         List<CoinMarkets> coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);

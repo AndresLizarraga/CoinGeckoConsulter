@@ -40,12 +40,12 @@ public class BotJobConfig extends DefaultBatchConfigurer {
 				.flow(orderStep1()).end().build();
 	}
 	
-	@Bean
-	public Job coinMarketsJob() {
-		return jobBuilderFactory.get("coinMarketsJob")
-				.incrementer(new RunIdIncrementer()).listener(listener())
-				.flow(orderStep2()).end().build();
-	}
+//	@Bean
+//	public Job coinMarketsJob() {
+//		return jobBuilderFactory.get("coinMarketsJob")
+//				.incrementer(new RunIdIncrementer()).listener(listener())
+//				.flow(orderStep2()).end().build();
+//	}
 
 	@Bean
 	public Step orderStep1() {
@@ -85,8 +85,8 @@ public class BotJobConfig extends DefaultBatchConfigurer {
 //        
 //      }
 	
-    @Override
-    public void setDataSource(DataSource dataSource) {
-        //This BatchConfigurer ignores any DataSource
-    }
+//    @Override
+//    public void setDataSource(DataSource dataSource) {
+//        //This BatchConfigurer ignores any DataSource
+//    }
 }
