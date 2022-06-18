@@ -19,16 +19,12 @@ import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import com.litesoftwares.coingecko.model.BTC_Consult;
 import com.litesoftwares.coingecko.repository.BTC_ConsultDao;
 import com.litesoftwares.coingecko.service.BTC_ConsultService;
-import com.litesoftwares.coingecko.service.CoinMarketsService;
 
 @Service
 public class BTC_ConsultServiceImpl implements BTC_ConsultService {
 	
 	@Autowired
 	private BTC_ConsultDao btcConsultDao;
-	
-	@Autowired 
-	private CoinMarketsService cMS;
 	
 	@Autowired
 	private LogListener log;
@@ -42,7 +38,7 @@ public class BTC_ConsultServiceImpl implements BTC_ConsultService {
         coinMarkets = coinGeckoClient.getCoinMarkets(Currency.USD);
     	if (!coinMarkets.isEmpty()) {
 	        if (btcc.isEmpty()) {
-	    		log.onInfo("The is no BTC entity created yed, creating a new one...");
+	    		log.onInfo("The is no BTC entity created yet, creating a new one...");
 	        	CoinMarkets coinMarket = coinMarkets.get(0);
 	        	log.onInfo("The updated BTC info is: " + coinMarket.toString());
 	        	BTC_Consult btc_c = buildFromCm(coinMarket);
