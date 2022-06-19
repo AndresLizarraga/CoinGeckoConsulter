@@ -21,7 +21,9 @@ public class UserWallet {
 	
 	private BigDecimal blocked_balance;
 	
-	private BigDecimal last_order_price;
+	private BigDecimal last_traded_price;
+	
+	private Date last_traded_price_date; 
 	
 	private BigDecimal average_traded_price;
 	
@@ -30,6 +32,8 @@ public class UserWallet {
 	private BigDecimal roi;
 	
 	private Date last_updated;
+	
+	private BigDecimal asset_open_order;
 
 	public String getSymbol() {
 		return symbol;
@@ -56,11 +60,11 @@ public class UserWallet {
 	}
 
 	public BigDecimal getLast_order_price() {
-		return last_order_price;
+		return last_traded_price;
 	}
 
 	public void setLast_order_price(BigDecimal last_order_price) {
-		this.last_order_price = last_order_price;
+		this.last_traded_price = last_order_price;
 	}
 
 	public BigDecimal getAverage_traded_price() {
@@ -93,5 +97,37 @@ public class UserWallet {
 
 	public void setLast_updated(Date last_updated) {
 		this.last_updated = last_updated;
+	}
+
+	public Date getLast_order_price_date() {
+		return last_traded_price_date;
+	}
+
+	public void setLast_order_price_date(Date last_order_price_date) {
+		this.last_traded_price_date = last_order_price_date;
+	}
+
+	public BigDecimal getLast_traded_price() {
+		return last_traded_price;
+	}
+
+	public void setLast_traded_price(BigDecimal last_traded_price) {
+		this.last_traded_price = last_traded_price;
+	}
+
+	public Date getLast_traded_price_date() {
+		return last_traded_price_date;
+	}
+
+	public void setLast_traded_price_date(Date last_traded_price_date) {
+		this.last_traded_price_date = last_traded_price_date;
+	}
+
+	public BigDecimal getAsset_open_order() {
+		return asset_open_order;
+	}
+
+	public void setAsset_open_order(BigDecimal asset_open_order) {
+		this.asset_open_order = asset_open_order;
 	}
 }
