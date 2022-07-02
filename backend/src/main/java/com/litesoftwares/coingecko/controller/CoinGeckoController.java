@@ -5,20 +5,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.domain.account.Trade;
+import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.market.TickerStatistics;
 import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
+import com.litesoftwares.coingecko.request.UserWalletRequest;
+import com.litesoftwares.coingecko.service.UserWalletService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,6 +35,9 @@ public class CoinGeckoController {
 	@Autowired
 	private LogListener log;
 
+	@Autowired
+	private UserWalletService uWS;
+	
 	@GetMapping(value="/consultar")
 	public String consultant() {
 		return "Welcome";
@@ -70,9 +81,27 @@ public class CoinGeckoController {
         	System.out.println(e.getMessage());
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+	}
+
+	@PostMapping(path="/updateUserWallet")
+	public ResponseEntity<Object> updateUserWallet(@RequestBody UserWalletRequest uWR) {
+		try {
+			uWS.createUserWalletData(uWR.getApiKey(), uWR.getSecret());
+		}
+		catch (Exception e) {
+			
+		}
+		return null;
+	}
+	
+	@PostMapping(value="/cO")
+	public ResponseEntity<Object> consultObject(@RequestBody UserWalletRequest uWR) {
+        BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance(uWR.getApiKey(),
+        		uWR.getSecret());
+        BinanceApiRestClient bRC = factory.newRestClient();
+        List<Trade> list = bRC.getMyTrades("BTCUSDT", Integer.valueOf(5));
         
-        
-		
+		return ResponseEntity.ok(list);
 	}
 	
 	private Map<String, TickerStatistics> tickerMap(List<TickerStatistics> stats) {
