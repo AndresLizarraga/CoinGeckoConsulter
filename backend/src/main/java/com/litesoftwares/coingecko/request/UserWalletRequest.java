@@ -5,6 +5,10 @@ public class UserWalletRequest {
 	private String apiKey;
 	
 	private String secret;
+	
+	private String asset;
+	
+	private String stable;
 
 	public String getApiKey() {
 		return apiKey;
@@ -22,4 +26,19 @@ public class UserWalletRequest {
 		this.secret = secret;
 	}
 
+	public String getAsset() {
+		return asset;
+	}
+
+	public void setAsset(String asset) {
+		this.asset = asset;
+	}
+
+	public String getStable() {
+		return stable;
+	}
+
+	public void setStable(String stable) {
+		this.stable = stable;
+	}
 }

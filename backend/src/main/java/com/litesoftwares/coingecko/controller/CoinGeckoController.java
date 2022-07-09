@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.domain.account.Trade;
-import com.binance.api.client.domain.account.TradeHistoryItem;
+import com.binance.api.client.domain.account.AssetBalance;
 import com.binance.api.client.domain.market.TickerStatistics;
 import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
+import com.litesoftwares.coingecko.model.response.UserWalletResponse;
 import com.litesoftwares.coingecko.request.UserWalletRequest;
 import com.litesoftwares.coingecko.service.UserWalletService;
 
@@ -83,10 +83,17 @@ public class CoinGeckoController {
         }
 	}
 
-	@PostMapping(path="/updateUserWallet")
-	public ResponseEntity<Object> updateUserWallet(@RequestBody UserWalletRequest uWR) {
+	@PostMapping(path="/createUserWallet")
+	public ResponseEntity<Object> createUserWallet(@RequestBody UserWalletRequest uWR) {
+		UserWalletResponse response;
 		try {
-			uWS.createUserWalletData(uWR.getApiKey(), uWR.getSecret());
+			response = uWS.createUserWalletData(uWR.getApiKey(), uWR.getSecret(), uWR.getAsset(), uWR.getStable());
+			if (response != null) {
+			log.onInfo("The information has been updated correctly.");
+			return ResponseEntity.ok(response);
+			} else { 
+				return ResponseEntity.badRequest().body("There has been a problem trying to create the UserWallet object");
+			}
 		}
 		catch (Exception e) {
 			
@@ -99,9 +106,8 @@ public class CoinGeckoController {
         BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance(uWR.getApiKey(),
         		uWR.getSecret());
         BinanceApiRestClient bRC = factory.newRestClient();
-        List<Trade> list = bRC.getMyTrades("BTCUSDT", Integer.valueOf(5));
-        
-		return ResponseEntity.ok(list);
+    	AssetBalance assetBalance = bRC.getAccount().getAssetBalance("BTC");
+		return ResponseEntity.ok(assetBalance);
 	}
 	
 	private Map<String, TickerStatistics> tickerMap(List<TickerStatistics> stats) {
