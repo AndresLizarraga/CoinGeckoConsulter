@@ -8,6 +8,8 @@ public class UserWalletResponse {
 
 	private String status;
 	
+	private String message;
+	
 	private String asset;
 	
 	private BigDecimal free_balance;
@@ -72,16 +74,23 @@ public class UserWalletResponse {
 		this.avg_traded_price = avg_traded_price;
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public UserWalletResponse buildFromUserWallet(UserWallet uW) {
-		if (uW.getBlocked_balance() != null && uW.getFree_balance() != null) {
+		if (uW.getSymbol() != null && uW.getAssetPair() != null) {
 			this.status = "OK";
 			this.free_balance = uW.getFree_balance();
 			this.locked_balance = uW.getBlocked_balance();
 			this.avg_traded_price = uW.getAverage_traded_price();
 			this.asset = uW.getSymbol();
 			this.assetPair = uW.getAssetPair();
-		} else {
-			this.status = "ERROR";
+			this.message = "Successfully updated!";
 		}
 		return this;
 	}
