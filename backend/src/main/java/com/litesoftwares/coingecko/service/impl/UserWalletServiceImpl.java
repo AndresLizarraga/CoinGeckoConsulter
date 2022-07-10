@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.AssetBalance;
 import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.market.TickerStatistics;
-import com.binance.api.client.exception.BinanceApiException;
 import com.litesoftwares.coingecko.component.LogListener;
 import com.litesoftwares.coingecko.model.UserWallet;
 import com.litesoftwares.coingecko.model.dto.UserWalletDTO;
@@ -41,7 +41,8 @@ public class UserWalletServiceImpl implements UserWalletService{
 		BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance(apiKey,
         		secret);
 		BinanceApiRestClient binanceRestClient = factory.newRestClient();
-		if (binanceRestClient != null) {
+		Account acc = binanceRestClient.getAccount();
+		if (acc != null) {
 			log.onInfo("Successful api query.");
 			log.onInfo("Collecting account information...");
 			UserWalletDTO uWDTO = buildUserWalletFromBinanceAPI(binanceRestClient, asset, stable);
@@ -52,15 +53,14 @@ public class UserWalletServiceImpl implements UserWalletService{
 			log.onInfo("Wallet saved successfully!");
 			uWR = uWR.buildFromUserWallet(userWallet);
 			return uWR;
-		} else {
-			uWR.setStatus("ERROR");
-			throw new BinanceApiException("Ocurrio un problema al consultar la API de binance.");
 		}
 		} catch (Exception e) {
-			log.onFatal("Ocurrio un problema al consultar el servicio. Motivo: " + e.getMessage());
-			e.printStackTrace();
+			log.onFatal("There was a problem when consulting the service: " + e.getMessage());
+			uWR.setStatus("ERROR");
+			uWR.setMessage(e.getMessage());
 			return uWR;
 		}
+		return null;
 	}
 	
 	private UserWalletDTO buildUserWalletFromBinanceAPI(BinanceApiRestClient binanceAPI, String asset, String stable) {

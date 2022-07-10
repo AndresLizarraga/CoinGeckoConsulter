@@ -86,20 +86,15 @@ public class CoinGeckoController {
 	@PostMapping(path="/createUserWallet")
 	public ResponseEntity<Object> createUserWallet(@RequestBody UserWalletRequest uWR) {
 		UserWalletResponse response;
-		try {
-			response = uWS.createUserWalletData(uWR.getApiKey(), uWR.getSecret(), uWR.getAsset(), uWR.getStable());
-			if (response != null) {
+		response = uWS.createUserWalletData(uWR.getApiKey(), uWR.getSecret(), uWR.getAsset(), uWR.getStable());
+		if (response.getStatus() != null && !response.getStatus().equals("ERROR")) {
 			log.onInfo("The information has been updated correctly.");
 			return ResponseEntity.ok(response);
-			} else { 
-				return ResponseEntity.badRequest().body("There has been a problem trying to create the UserWallet object");
+		} else { 
+			return ResponseEntity.badRequest().body(response);
 			}
 		}
-		catch (Exception e) {
-			
-		}
-		return null;
-	}
+	
 	
 	@PostMapping(value="/cO")
 	public ResponseEntity<Object> consultObject(@RequestBody UserWalletRequest uWR) {
