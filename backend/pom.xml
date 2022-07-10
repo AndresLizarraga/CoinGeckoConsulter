@@ -116,6 +116,16 @@
             <scope>provided</scope>
         </dependency>
 
+		<!--OFFICIAL RECOMMENDED BINANCE API -->
+
+		<dependency>
+		     <groupId>io.github.binance</groupId>
+		     <artifactId>binance-connector-java</artifactId>
+		     <version>1.7.0</version>
+		</dependency>
+		
+		<!--THIRD PARTY BINANCE API -->
+		
 		<dependency>
  			 <groupId>com.github.binance-exchange</groupId>
  			 <artifactId>binance-java-api</artifactId>
