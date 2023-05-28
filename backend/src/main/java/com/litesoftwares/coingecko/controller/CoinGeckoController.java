@@ -96,7 +96,7 @@ public class CoinGeckoController {
 		}
 	
 	
-	@PostMapping(value="/cO")
+	@PostMapping(value="/testApi")
 	public ResponseEntity<Object> consultObject(@RequestBody UserWalletRequest uWR) {
         BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance(uWR.getApiKey(),
         		uWR.getSecret());
